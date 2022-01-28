@@ -1,6 +1,6 @@
 /// <reference types="react-scripts" />
 
-type AudioContext = typeof AudioContext
+type AudioContextType = typeof AudioContext
 
 interface Window extends Window {
     webkitAudioContext: AudioContextType
