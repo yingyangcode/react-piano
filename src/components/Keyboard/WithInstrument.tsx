@@ -1,8 +1,13 @@
 import { useEffect } from "react";
 import { useInstrument } from "../../state/Instrument";
 import { useAudioContext } from "../AudioContextProvider";
-import { SoundfontProvider } from "../../adapters/Soundfont";
-import { useSoundfont } from "../../adapters/Soundfont";
+import {
+  SoundfontProvider,
+  withInstrument,
+  withInstrumentBasedOnHook,
+  withInstrumentStatic,
+  useSoundfont,
+} from "../../adapters/Soundfont";
 import { useMount } from "../../utils/useMount";
 import { Keyboard } from "../Keyboard";
 
@@ -22,15 +27,30 @@ import { Keyboard } from "../Keyboard";
 // };
 
 // Using Render Props
+// export const KeyboardWithInstrument = () => {
+//   const AudioContext = useAudioContext()!;
+//   const { instrument } = useInstrument();
+
+//   return (
+//     <SoundfontProvider
+//       AudioContext={AudioContext}
+//       instrument={instrument}
+//       render={(props) => <Keyboard {...props} />}
+//     />
+//   );
+// };
+
+// Using HOC class component
+const WrappedKeyboard = withInstrument(Keyboard);
+
+// Using HOC withInstrumentBasedOnHook
+// const WrappedKeyboardBasedOnHook = withInstrumentBasedOnHook(Keyboard);
+
 export const KeyboardWithInstrument = () => {
   const AudioContext = useAudioContext()!;
   const { instrument } = useInstrument();
 
   return (
-    <SoundfontProvider
-      AudioContext={AudioContext}
-      instrument={instrument}
-      render={(props) => <Keyboard {...props} />}
-    />
+    <WrappedKeyboard AudioContext={AudioContext} instrument={instrument} />
   );
 };

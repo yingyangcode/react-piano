@@ -24,7 +24,7 @@ type ProviderState = {
   current: Optional<InstrumentName>
 }
 
-export class SoundfontProvider extends Component<
+export class SoundfontProviderClass extends Component<
   ProviderProps,
   ProviderState
 > {
